@@ -1,18 +1,39 @@
 "use client";
 
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import ParametersForm from "./ParametersForm";
 import ResultsDisplay from "./ResultsDisplay";
 import InteractiveChart from "./InteractiveChart";
 import PowerPlantSelector from "./PowerPlantSelector";
 import DidYouKnow from "./DidYouKnow";
+import Quiz from "./Quiz";
 
 export function HydropowerSimulator() {
+  const [showQuiz, setShowQuiz] = useState(false);
+
+  if (showQuiz) {
+    return (
+      <div className="container mx-auto p-4">
+        <div className="mb-6">
+          <Button onClick={() => setShowQuiz(false)}>
+            ← Powrót do symulatora
+          </Button>
+        </div>
+        <Quiz />
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold text-center mb-8">
-        Wirtualny Projektant Elektrowni Wodnej
-      </h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">
+          Wirtualny Projektant Elektrowni Wodnej
+        </h1>
+        <Button onClick={() => setShowQuiz(true)}>Sprawdź swoją wiedzę</Button>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <PowerPlantSelector />
